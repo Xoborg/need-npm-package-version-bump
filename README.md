@@ -72,9 +72,10 @@ on:
 
 ### Inputs
 
-| Name         | Required | Default | Description                                                    |
-| ------------ | -------- | ------- | -------------------------------------------------------------- |
-| `repo-token` | `false`  | `""`    | A GitHub issued token that can read the base branch's contents |
+| Name                | Required | Default          | Description                                                    |
+| ------------------- | -------- | ---------------- | -------------------------------------------------------------- |
+| `repo-token`        | `false`  | `""`             | A GitHub issued token that can read the base branch's contents |
+| `package-json-path` | `false`  | `"package.json"` | Package.json path                                              |
 
 ## Results
 
