@@ -21,9 +21,14 @@ try {
 			headers.append("Authorization", `token ${token}`);
 		}
 
+		const packageJsonPath = core.getInput("package-path-path");
+		if (packageJsonPath === "") {
+			packageJsonPath = "package.json";
+		}
+
 		core.info(`Fetching Old Version from ${baseOwner}/${baseRepo}/${baseSha}...`);
 		const oldResponse = await fetch(
-			`https://raw.githubusercontent.com/${baseOwner}/${baseRepo}/${baseSha}/package.json`,
+			`https://raw.githubusercontent.com/${baseOwner}/${baseRepo}/${baseSha}/${packageJsonPath}`,
 			{
 				headers,
 			},
@@ -33,7 +38,7 @@ try {
 		const oldVersion = oldPackage.version;
 
 		core.info("Fetching New Version...");
-		const newStream = createReadStream(`${process.env.GITHUB_WORKSPACE ?? "."}/package.json`);
+		const newStream = createReadStream(`${process.env.GITHUB_WORKSPACE ?? "."}/${packageJsonPath}`);
 		const newResponse = new Response(newStream);
 		const newJson = await newResponse.json();
 		const newPackage = newJson as JSONSchemaForNPMPackageJsonFiles;
