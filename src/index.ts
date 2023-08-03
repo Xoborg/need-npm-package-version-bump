@@ -21,7 +21,7 @@ try {
 			headers.append("Authorization", `token ${token}`);
 		}
 
-		const packageJsonPath = core.getInput("package-json-path");
+		let packageJsonPath = core.getInput("package-json-path");
 		if (packageJsonPath === "") {
 			packageJsonPath = "package.json";
 		}
